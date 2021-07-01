@@ -462,9 +462,8 @@ BBR_grub(){
     elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
 	     menu_id=$(grep submenu /boot/grub/grub.cfg|awk '{print $7}'|tr -d "\'")
 		 kernel_id=$(grep bbrplus-advanced /boot/grub/grub.cfg|awk '{print $15}'|tr -d "\'")
-	    #  menu_id=$(grep bbrplus-advanced /boot/grub/grub.cfg|grep default|awk '{print $2}'| tr -d 'default=')
 		 menu_kernel="\"$menu_id>$kernel_id\""
-		 sed -i 's/GRUB_DEFAULT=$/${menu_kernel}/g' /etc/default/grub
+		 sed  's/GRUB_DEFAULT=0/GRUB_DEFAULT='"${menu_kernel}"'/g' /etc/default/grub
         /usr/sbin/update-grub
     fi
 }
