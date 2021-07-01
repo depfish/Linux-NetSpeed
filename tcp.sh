@@ -463,7 +463,7 @@ BBR_grub(){
 	     menu_id=$(grep submenu /boot/grub/grub.cfg|awk '{print $7}'|tr -d "\'")
 		 kernel_id=$(grep bbrplus-advanced /boot/grub/grub.cfg|awk '{print $15}'|tr -d "\'")
 		 menu_kernel="\"$menu_id>$kernel_id\""
-		 sed  's/GRUB_DEFAULT=0/GRUB_DEFAULT='"${menu_kernel}"'/g' /etc/default/grub
+		 sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT='"${menu_kernel}"'/g' /etc/default/grub
         /usr/sbin/update-grub
     fi
 }
