@@ -460,6 +460,8 @@ BBR_grub(){
             grub2-set-default 0
         fi
     elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
+	     menu_id=$(grep bbrplus-advanced /boot/grub/grub.cfg|grep default|awk '{print $2}'| tr -d 'default=')
+		 sed -i 's/GRUB_DEFAULT=$/${menu_id}/g' /etc/default/grub
         /usr/sbin/update-grub
     fi
 }
